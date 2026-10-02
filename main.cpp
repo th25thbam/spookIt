@@ -17,6 +17,24 @@ int popX=0.0;
 int popY=0.0;
 int popRadius=0;
 
+struct Star{
+    float x;
+    float y;
+    float speed;
+    float size;
+};
+
+const int num_stars=40;
+Star stars[num_stars];
+
+void initStars(){
+    for(int i=0; i < num_stars; i++ ){
+        stars[i].x=(float)GetRandomValue(0,800);
+        stars[i].y=(float)GetRandomValue(0,800);
+        stars[i].speed=(float)GetRandomValue(1,3)*0.2f;
+        stars[i].size=(float)GetRandomValue(1,3);
+    }
+}
 
 void drawPumpkin(){
     if(popping){
@@ -59,7 +77,15 @@ void spawnPumpkin(){
 int main(){
     InitWindow(800,600, "spookIt");
     SetTargetFPS(60);
+    initStars();
     while(!WindowShouldClose()){
+        Vector2 mouse = GetMousePosition();
+
+        for(int i=0; i<num_stars; i++){
+            stars[i].x-=stars[i].speed;
+            if(stars[i].x < 0) stars[i].x=800;
+        }
+
         if(!gameStarted){
             if(IsKeyPressed(KEY_SPACE)){
                 gameStarted=true;
@@ -67,7 +93,6 @@ int main(){
             }
         }
         else if(!gameOver){
-            Vector2 mouse = GetMousePosition();
             pumpkinTimer += GetFrameTime();
 
             if(pumpkinTimer >= pumpkinDuration){
@@ -123,6 +148,10 @@ int main(){
         BeginDrawing();
         ClearBackground((Color){15, 10, 25, 25});
 
+        for(int i=0; i<num_stars; i++){
+            DrawCircle((int)stars[i].x, (int)stars[i].y, stars[i].size, (Color){200, 200, 220, 150});
+        }
+
         DrawCircle(700, 100, 50, (Color){220, 220, 200, 255});
         DrawCircle(680, 85, 8, (Color){170, 170, 160, 255});
         DrawCircle(715, 110, 6, (Color){170, 170, 160, 255});
@@ -135,8 +164,15 @@ int main(){
         }
 
         if(!gameStarted){
-            DrawText("PUMPKIN POP", 260, 220, 50, ORANGE);
-            DrawText("Press SPACE to start!!", 275, 300, 25, WHITE);
+            DrawText("SpookIt - PUMPKIN POP", 130, 140, 45, ORANGE);
+            DrawRectangle(180, 205, 440, 170, (Color){25, 20, 35, 230});
+            DrawRectangleLines(180, 205, 440, 170, (Color){100, 70, 120, 255});
+            DrawText("How to play:", 335, 220, 18, (Color){200, 180, 220, 255});
+            DrawText("- Click spooky pumpkins before they spook themself!", 205, 255, 15, WHITE);
+            DrawText("- Smaller pumpkins: more points(upto 3 points)!", 205, 285, 15, WHITE);
+            DrawText("- Missing a pumpkin spooks 1 life(total 5 lives)!", 205, 315, 15, WHITE);
+
+            DrawText("Press SPACE to start!!", 265, 410, 20, (Color){167, 243, 208, 255});
         }
         else{
             drawPumpkin();
