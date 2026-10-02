@@ -1,79 +1,6 @@
 #include "raylib.h"
-
-int pumpkins=0;
-int pumpkinX=400;
-int pumpkinY=300;
-int pumpkinRadius=40;
-int score=0;
-float pumpkinTimer=0.0f;
-float pumpkinDuration=2.0f;
-bool popping=false;
-float popTimer=0.0f;
-int pumpkinPoints=1;
-int lives=5;
-bool gameOver=false;
-bool gameStarted=false;
-float difficultyTimer=0.0f;
-int popX=0.0;
-int popY=0.0;
-int popRadius=0;
-
-struct Star{
-    float x;
-    float y;
-    float speed;
-    float size;
-};
-
-const int num_stars=40;
-Star stars[num_stars];
-
-void initStars(){
-    for(int i=0; i < num_stars; i++ ){
-        stars[i].x=(float)GetRandomValue(0,800);
-        stars[i].y=(float)GetRandomValue(0,800);
-        stars[i].speed=(float)GetRandomValue(1,3)*0.2f;
-        stars[i].size=(float)GetRandomValue(1,3);
-    }
-}
-
-void drawPumpkin(){
-    if(popping){
-        float scale=1.0f - popTimer/0.15f;
-        if(scale<0) scale=0;
-        float currentRadius=popRadius*scale;
-        DrawCircle(popX, popY, currentRadius, ORANGE);
-        DrawCircle(popX - (int)(15*scale), popY - (int)(10*scale), (int)(6*scale), BLACK);
-        DrawCircle(popX + (int)(15*scale), popY - (int)(10*scale), (int)(6*scale), BLACK);
-        DrawRectangle(popX - (int)(18*scale), popY + (int)(10*scale), (int)(36*scale), (int)(8*scale), BLACK);
-    }
-    
-    else{
-        DrawCircle(pumpkinX, pumpkinY, pumpkinRadius, ORANGE);
-
-        DrawCircle(pumpkinX-15, pumpkinY-10, 6, BLACK);
-        DrawCircle(pumpkinX+15, pumpkinY-10, 6, BLACK);
-
-        DrawRectangle(pumpkinX-18, pumpkinY+10, 36, 8, BLACK);
-        DrawRectangle(pumpkinX-6, pumpkinY-pumpkinRadius-10, 12, 15, DARKGREEN);
-    }
-}
-
-void spawnPumpkin(){
-    pumpkinX=GetRandomValue(50,750);
-    pumpkinY=GetRandomValue(50,550);
-    pumpkinRadius=GetRandomValue(15,30);
-    if(pumpkinRadius<=20){
-        pumpkinPoints=3;
-    }
-    else if(pumpkinRadius<=35){
-        pumpkinPoints=2;
-    }
-    else{
-        pumpkinPoints=1;
-    }
-}
-
+#include "functions.h"
+#include "globals.h"
 int main(){
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(800,600, "spookIt");
@@ -82,11 +9,7 @@ int main(){
     RenderTexture2D target = LoadRenderTexture(800, 600);
     SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
     while(!WindowShouldClose()){
-
-        for(int i=0; i<num_stars; i++){
-            stars[i].x-=stars[i].speed;
-            if(stars[i].x < 0) stars[i].x=800;
-        }
+        updateStars();
 
         Vector2 realMouse = GetMousePosition();
         Vector2 mouse = {
@@ -156,9 +79,7 @@ int main(){
         BeginTextureMode(target);
         ClearBackground((Color){15, 10, 25, 25});
 
-        for(int i=0; i<num_stars; i++){
-            DrawCircle((int)stars[i].x, (int)stars[i].y, stars[i].size, (Color){200, 200, 220, 150});
-        }
+        drawStars();
 
         DrawCircle(700, 100, 50, (Color){220, 220, 200, 255});
         DrawCircle(680, 85, 8, (Color){170, 170, 160, 255});

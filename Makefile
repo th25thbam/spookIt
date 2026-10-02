@@ -1,6 +1,6 @@
 CXX = g++
 TARGET = spookIt
-SRC = main.cpp
+SRC = main.cpp functions.cpp globals.cpp
 
 # Raylib libraries and flags for Linux/WSL
 LIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
