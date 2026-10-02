@@ -1,5 +1,6 @@
 #include "raylib.h"
 
+int pumpkins=0;
 int pumpkinX=400;
 int pumpkinY=300;
 int pumpkinRadius=40;
@@ -79,7 +80,6 @@ int main(){
     SetTargetFPS(60);
     initStars();
     while(!WindowShouldClose()){
-        Vector2 mouse = GetMousePosition();
 
         for(int i=0; i<num_stars; i++){
             stars[i].x-=stars[i].speed;
@@ -93,6 +93,7 @@ int main(){
             }
         }
         else if(!gameOver){
+            Vector2 mouse = GetMousePosition();
             pumpkinTimer += GetFrameTime();
 
             if(pumpkinTimer >= pumpkinDuration){
@@ -109,6 +110,7 @@ int main(){
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                 if(CheckCollisionPointCircle(mouse, {(float)pumpkinX, (float)pumpkinY}, pumpkinRadius)){
                     score+=pumpkinPoints;
+                    pumpkins++;
                     popX=pumpkinX;
                     popY=pumpkinY;
                     popRadius=pumpkinRadius;
@@ -169,24 +171,27 @@ int main(){
             DrawRectangleLines(180, 205, 440, 170, (Color){100, 70, 120, 255});
             DrawText("How to play:", 335, 220, 18, (Color){200, 180, 220, 255});
             DrawText("- Click spooky pumpkins before they spook themself!", 205, 255, 15, WHITE);
-            DrawText("- Smaller pumpkins: more points(upto 3 points)!", 205, 285, 15, WHITE);
+            DrawText("- Smaller pumpkins = more points(upto 3 points)!", 205, 285, 15, WHITE);
             DrawText("- Missing a pumpkin spooks 1 life(total 5 lives)!", 205, 315, 15, WHITE);
 
             DrawText("Press SPACE to start!!", 265, 410, 20, (Color){167, 243, 208, 255});
         }
         else{
-            drawPumpkin();
+            if(!gameOver) {
+                drawPumpkin();
+            }
 
-            DrawText(TextFormat("Pumpkins SPOOKED: %d", score), 20, 30, 30, WHITE);
-            DrawText(TextFormat("SPOOK Points: +%d", pumpkinPoints), 20, 70, 25, WHITE);
-            DrawText(TextFormat("Lives Remaining: %d", lives), 20, 100, 25, WHITE);
+            DrawText(TextFormat("Total SPOOK Points: %d", score), 20, 30, 25, WHITE);
+            DrawText(TextFormat("SPOOK Points: +%d", pumpkinPoints), 20, 65, 20, WHITE);
+            DrawText(TextFormat("Lives Remaining: %d", lives), 20, 95, 20, WHITE);
 
             if(gameOver){
-                DrawText("GAME SPOOKED", 280, 250, 50, RED);
-                DrawText(TextFormat("Final Score: %d", score), 300, 320, 25, WHITE);
-                DrawText("Press R to Restart spookIt", 290, 370, 20, GRAY);
+                DrawText("GAME SPOOKED", 240, 210, 45, RED);
+                DrawText(TextFormat("Final Score: %d", score), 240, 280, 22, WHITE);
+                DrawText(TextFormat("Total Pumpkins Spooked: %d", pumpkins), 240, 310, 22, WHITE);
+                DrawText("Press R to Restart spookIt", 240, 350, 18, GRAY);
             }
-        } 
+        }
         EndDrawing();
     }
     CloseWindow();
