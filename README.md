@@ -23,7 +23,7 @@ Build System: GNU Make (Makefile)
 To run and play spookIt locally, follow these steps:
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/th25thbam/spookIt](https://github.com/th25thbam/spookIt)
+   git clone [https://github.com/th25thbam/spookIt.git](https://github.com/th25thbam/spookIt.git)
    cd spookIt
 2. Ensure dependecies like Raylib are installed [https://github.com/raysan5/raylib]
 3. Compile and run using Makefile
