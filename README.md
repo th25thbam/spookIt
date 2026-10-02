@@ -10,13 +10,16 @@ A Clean, interactive C++ game built from scratch using Raylib Library. Players t
 
 ## Features 
 **Modular Architecture:** Cleanly organized codebase separating game mechanics.
+
 **Responsive Display:** The game automatically scales to fit any window size or full screen mode.
+
 **Progressive Difficulty:** The game speeds up the longer the player survives.
+
 **Aesthetic Visuals:** Custom Visuals defined to match the dark and spooky theme.
 
 ## Technologies & Tools
-Language: C++
-Library: Raylib
+Language: C++<br>
+Library: Raylib<br>
 Build System: GNU Make (Makefile)
 
 ## How to play spookIt
@@ -29,3 +32,12 @@ To run and play spookIt locally, follow these steps:
 3. Compile and run using Makefile
     ```base 
     make run
+4. Game controls
+
+    - press space to start playing.
+    - mouse left click to pop pumpkins.
+    - press R to restart after all lives have been consumed.
+
+## Inspiration
+i wanted to try making an aim trainer in 2D while keeping it simple and fun, and using visuals that would match the spooky halloween theme of october.
+
