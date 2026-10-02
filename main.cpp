@@ -72,7 +72,6 @@ void spawnPumpkin(){
     else{
         pumpkinPoints=1;
     }
-
 }
 
 int main(){
@@ -197,6 +196,7 @@ int main(){
                 DrawText(TextFormat("Final Score: %d", score), 240, 280, 22, WHITE);
                 DrawText(TextFormat("Total Pumpkins Spooked: %d", pumpkins), 240, 310, 22, WHITE);
                 DrawText("Press R to Restart spookIt", 240, 350, 18, GRAY);
+                DrawText("Press Escape to exit", 240, 380, 18, GRAY);
             }
         }
         EndTextureMode();
