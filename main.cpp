@@ -62,11 +62,11 @@ void drawPumpkin(){
 void spawnPumpkin(){
     pumpkinX=GetRandomValue(50,750);
     pumpkinY=GetRandomValue(50,550);
-    pumpkinRadius=GetRandomValue(20,50);
-    if(pumpkinRadius<=25){
+    pumpkinRadius=GetRandomValue(15,30);
+    if(pumpkinRadius<=20){
         pumpkinPoints=3;
     }
-    else if(pumpkinRadius<=40){
+    else if(pumpkinRadius<=35){
         pumpkinPoints=2;
     }
     else{
@@ -76,15 +76,24 @@ void spawnPumpkin(){
 }
 
 int main(){
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(800,600, "spookIt");
     SetTargetFPS(60);
     initStars();
+    RenderTexture2D target = LoadRenderTexture(800, 600);
+    SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
     while(!WindowShouldClose()){
 
         for(int i=0; i<num_stars; i++){
             stars[i].x-=stars[i].speed;
             if(stars[i].x < 0) stars[i].x=800;
         }
+
+        Vector2 realMouse = GetMousePosition();
+        Vector2 mouse = {
+            realMouse.x * (800.0f / (float)GetScreenWidth()),
+            realMouse.y * (600.0f / (float)GetScreenHeight())
+        };
 
         if(!gameStarted){
             if(IsKeyPressed(KEY_SPACE)){
@@ -93,7 +102,6 @@ int main(){
             }
         }
         else if(!gameOver){
-            Vector2 mouse = GetMousePosition();
             pumpkinTimer += GetFrameTime();
 
             if(pumpkinTimer >= pumpkinDuration){
@@ -146,8 +154,7 @@ int main(){
             gameOver=false;
             spawnPumpkin();
         }
-
-        BeginDrawing();
+        BeginTextureMode(target);
         ClearBackground((Color){15, 10, 25, 25});
 
         for(int i=0; i<num_stars; i++){
@@ -192,8 +199,24 @@ int main(){
                 DrawText("Press R to Restart spookIt", 240, 350, 18, GRAY);
             }
         }
+        EndTextureMode();
+
+        BeginDrawing();
+        ClearBackground(BLACK);
+
+        DrawTexturePro(
+            target.texture, 
+            (Rectangle){ 0.0f, 0.0f, (float)target.texture.width, (float)-target.texture.height }, 
+            (Rectangle){ 0.0f, 0.0f, (float)GetScreenWidth(), (float)GetScreenHeight() }, 
+            (Vector2){ 0.0f, 0.0f }, 
+            0.0f, 
+            WHITE
+        );
+
         EndDrawing();
+        
     }
+    UnloadRenderTexture(target);
     CloseWindow();
     return 0;
 }
