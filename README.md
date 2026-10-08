@@ -13,7 +13,7 @@ A Clean, interactive C++ game built from scratch using Raylib Library. Players t
 2. spookIt can be played in any kind of display mode such as windowed or fullscreen.
 3. the difficulty of the game increases the longer the player plays the game in order to make the game more fun and engaging.
 4. the visuals in this game are especially designed to match the theme which this game is based on, namely dark and spooky cause of spooktober.
-5. this project has helped me learn dive deeper into C++ which would help me get better at game development and also learn more about libraries and frameworks, namely Raylib.
+5. this project has helped me dive deeper into C++ which would help me get better at game development and also learn more about libraries and frameworks, namely Raylib.
 
 ## Technologies & Tools
 Language: C++<br>
