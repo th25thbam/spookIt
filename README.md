@@ -9,13 +9,11 @@ A Clean, interactive C++ game built from scratch using Raylib Library. Players t
 ![preview](image-1.png)
 
 ## Features 
-**Modular Architecture:** Cleanly organized codebase separating game mechanics.
-
-**Responsive Display:** The game automatically scales to fit any window size or full screen mode.
-
-**Progressive Difficulty:** The game speeds up the longer the player survives.
-
-**Aesthetic Visuals:** Custom Visuals defined to match the dark and spooky theme.
+1. the code has been divided into various files such as header files and source file, header files for variables and functions, source file for the codebase using the header files, this allows me to use parts of this code in later projects which i might work on. 
+2. spookIt can be played in any kind of display mode such as windowed or fullscreen.
+3. the difficulty of the game increases the longer the player plays the game in order to make the game more fun and engaging.
+4. the visuals in this game are especially designed to match the theme which this game is based on, namely dark and spooky cause of spooktober.
+5. this project has helped me learn dive deeper into C++ which would help me get better at game development and also learn more about libraries and frameworks, namely Raylib.
 
 ## Technologies & Tools
 Language: C++<br>
@@ -23,7 +21,8 @@ Library: Raylib<br>
 Build System: GNU Make (Makefile)
 
 ## How to play spookIt
-Before building spookIt, ensure you have C/C++ compiler and Raylib library installed [https://github.com/raysan5/raylib]
+- Before building spookIt, ensure you have C/C++ compiler and Raylib library installed [https://github.com/raysan5/raylib]
+- This game has only been tested on WSL2(Ubuntu 26.04)
 
 ### Linux & WSL(Ubuntu/Debian)
 
@@ -61,10 +60,10 @@ Before building spookIt, ensure you have C/C++ compiler and Raylib library insta
     g++ main.cpp functions.cpp globals.cpp -o spookIt -lraylib -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
 
 #### Game controls
-    - press space to start playing.
-    - mouse left click to pop pumpkins.
-    - press R to restart after all lives have been consumed.
-    - press Esc to exit.
+1. press space to start playing.
+2. mouse left click to pop pumpkins.
+3. press R to restart after all lives have been consumed.
+4. press Esc to exit.
 
 ## Inspiration
 i wanted to try making an aim trainer in 2D while keeping it simple and fun, and using visuals that would match the dark and spooky halloween theme of october.
