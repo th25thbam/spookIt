@@ -66,6 +66,6 @@ Build System: GNU Make (Makefile)
 4. press Esc to exit.
 
 ## Inspiration
-i wanted to try making an aim trainer in 2D while keeping it simple and fun, and using visuals that would match the dark and spooky halloween theme of october.
+i wanted to try making an aim trainer in 2D while keeping it simple and fun, and using visuals that would make the game look dark and spooky just like halloween.
 
 
