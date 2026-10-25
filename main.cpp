@@ -10,7 +10,6 @@ int main(){
     SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
     while(!WindowShouldClose()){
         updateStars();
-
         Vector2 realMouse = GetMousePosition();
         Vector2 mouse = {
             realMouse.x * (800.0f / (float)GetScreenWidth()),
@@ -23,6 +22,7 @@ int main(){
                 spawnPumpkin();
             }
         }
+
         else if(!gameOver){
             pumpkinTimer += GetFrameTime();
 
@@ -100,7 +100,6 @@ int main(){
             DrawText("- Click spooky pumpkins before they spook themself!", 205, 255, 15, WHITE);
             DrawText("- Smaller pumpkins = more points(upto 3 points)!", 205, 285, 15, WHITE);
             DrawText("- Missing a pumpkin spooks 1 life(total 5 lives)!", 205, 315, 15, WHITE);
-
             DrawText("Press SPACE to start!!", 265, 410, 20, (Color){167, 243, 208, 255});
         }
         else{
@@ -135,7 +134,6 @@ int main(){
         );
 
         EndDrawing();
-        
     }
     UnloadRenderTexture(target);
     CloseWindow();
